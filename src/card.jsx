@@ -1,15 +1,19 @@
 import React from 'react';
 import { ShoppingCart, Eye } from 'lucide-react';
+import { BASE_URL } from '../config';
 
 const Card = ({ image, title, description, price, category }) => {
-  // Optional: Add button handlers if needed
+  const imageURL =
+    image?.startsWith('http') || image?.startsWith('blob')
+      ? image
+      : `${BASE_URL}${image}`;
 
   return (
     <div className="w-full max-w-sm bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300">
       {/* Image */}
       <div className="relative overflow-hidden">
         <img
-          src={image?.startsWith('http') || image?.startsWith('blob') ? image : `http://localhost:5000${image}`}
+          src={imageURL}
           alt={title}
           className="w-full h-40 object-cover"
         />
