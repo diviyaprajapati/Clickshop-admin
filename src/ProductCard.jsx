@@ -1,6 +1,7 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import { BASE_URL } from '../config';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCard = ({ product, onEdit, onDelete }) => {
@@ -25,12 +26,14 @@ const ProductCard = ({ product, onEdit, onDelete }) => {
     });
   };
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+  const imageURL = product.image?.startsWith('http')
+    ? product.image
+    : `${BASE_URL}${product.image}`;
 
   return (
     <div className="bg-white rounded-2xl shadow p-4 mb-6 hover:shadow-lg transition-all duration-300 max-w-sm w-full">
       <img
-        src={`${backendUrl}${product.image}`}
+        src={imageURL}
         alt={product.title}
         className="w-full h-40 object-cover mb-3 rounded"
       />
